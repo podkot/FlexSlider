@@ -458,7 +458,12 @@
         if (pause) slider.pause();
         
         // SYNC:
-        if (slider.syncExists && !fromNav) methods.sync("animate");
+        if (slider.syncExists && !fromNav) {
+            var slave = $(vars.sync).data("flexslider");
+            slider.direction = (slider.currentSlide < target) ? "next" : "prev"
+            slave.direction = slider.direction;
+            methods.sync("animate");
+        }
         
         // CONTROLNAV
         if (vars.controlNav) methods.controlNav.active();
